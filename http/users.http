@@ -1,0 +1,49 @@
+# @name login
+POST http://localhost:3000/main/auth/login
+Content-Type: application/json
+
+{ 
+  "username": "normal@test.com",
+  "password": "atbjz5g6"
+}
+
+### super_user
+# @name login
+POST http://localhost:3000/main/auth/login
+Content-Type: application/json
+
+{ 
+  "username": "super@test.com",
+  "password": "39tp317c"
+}
+
+###
+@token = {{login.response.body.access_token}}
+###
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{ 
+  "email": "super@test.com",
+  "role": "super_user"
+}
+
+###
+GET http://localhost:3000/get-all
+Content-Type: application/json
+
+###
+GET http://localhost:3000/stock?q=goog.us
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+GET http://localhost:3000/history
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+GET http://localhost:3000/stats
+Content-Type: application/json
+Authorization: Bearer {{token}}
+  
